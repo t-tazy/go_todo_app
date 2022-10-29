@@ -1,0 +1,22 @@
+linters-settings:
+  govet:
+    # 変数の再宣言をチェックするか
+    check-shadowing: false
+  gocyclo:
+    min-complexity: 30
+  misspell:
+    locale: US
+
+linters:
+  disable-all: true
+  enable:
+    - goimports # インポートの修正
+    - errcheck # エラーハンドリングが行われているかチェック
+    - gocognit # 関数の認知的複雑度をチェック
+    - gocyclo # 関数の循環的複雑度をチェック
+    - gofmt
+    - govet # 公式の静的解析ツール
+    - misspell # スペルチェック
+    - staticcheck # staticcheckを使用
+    - whitespace # 行末の空白をチェック
+    - unused # 使用されていない変数や定数、関数や型などを報告
