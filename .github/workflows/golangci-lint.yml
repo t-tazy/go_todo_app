@@ -1,11 +1,11 @@
 name: golangci-lint
 on:
   push:
-		# filterをかける
-		# vで始まるタグが付いたブランチへのpush
+    # filterをかける
+    # vで始まるタグが付いたブランチへのpush
     tags:
       - v*
-		# main,masterのへのpush
+    # main,masterのへのpush
     branches:
       - master
       - main
