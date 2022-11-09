@@ -12,7 +12,7 @@ jobs:
         image: mysql:8
         options: >-
           --health-cmd "mysqladmin ping -h localhost"
-          --health-linterval 20s
+          --health-interval 20s
           --health-timeout 10s
           --health-retries 10
         ports:
