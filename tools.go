@@ -2,4 +2,4 @@
 
 package main
 
-import _ "github.com/motryer/moq"
+import _ "github.com/matryer/moq"
