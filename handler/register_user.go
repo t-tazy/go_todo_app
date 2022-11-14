@@ -17,8 +17,8 @@ func (ru *RegisterUser) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	var b struct {
 		Name     string `json:"name" validate:"required"`
-		Password string `json:"password" validate"required"`
-		Role     string `json:"role" validate"required"`
+		Password string `json:"password" validate:"required"`
+		Role     string `json:"role" validate:"required"`
 	}
 	if err := json.NewDecoder(r.Body).Decode(&b); err != nil {
 		RespondJSON(ctx, w, &ErrResponse{
