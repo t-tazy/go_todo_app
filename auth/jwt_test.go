@@ -58,7 +58,7 @@ func TestJWTer_GenerateToken(t *testing.T) {
 func TestJWTer_GetToken(t *testing.T) {
 	t.Parallel()
 
-	c := clock.FixedClocer{}
+	c := clock.FixedClocker{}
 	want, err := jwt.NewBuilder().
 		JwtID(uuid.New().String()).
 		Issuer(`github.com/t-tazy/go_todo_app`).
@@ -113,13 +113,13 @@ func TestJWTer_GetToken(t *testing.T) {
 type FixedTomorrowClocker struct{}
 
 func (c FixedTomorrowClocker) Now() time.Time {
-	return clock.FixedClocer{}.Now().Add(24 * time.Hour)
+	return clock.FixedClocker{}.Now().Add(24 * time.Hour)
 }
 
 func TestJWTer_GetToken_NG(t *testing.T) {
 	t.Parallel()
 
-	c := clock.FixedClocer{}
+	c := clock.FixedClocker{}
 	tok, err := jwt.NewBuilder().
 		JwtID(uuid.New().String()).
 		Issuer(`github.com/t-tazy/go_todo_app`).

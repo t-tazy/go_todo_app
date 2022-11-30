@@ -66,7 +66,7 @@ func prepareTasks(ctx context.Context, t *testing.T, con Execer) (entity.UserID,
 	if _, err := con.ExecContext(ctx, "DELETE FROM task;"); err != nil {
 		t.Logf("failed to initialize task: %v", err)
 	}
-	c := clock.FixedClocer{}
+	c := clock.FixedClocker{}
 	wants := entity.Tasks{
 		{
 			UserID:   userID,
@@ -121,7 +121,7 @@ func TestRepository_AddTask(t *testing.T) {
 	t.Parallel()
 	ctx := context.Background()
 
-	c := clock.FixedClocer{}
+	c := clock.FixedClocker{}
 	var wantID int64 = 20
 	okTask := &entity.Task{
 		Title:    "ok task",
