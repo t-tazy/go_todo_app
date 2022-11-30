@@ -156,7 +156,7 @@ func TestJWTer_GetToken_NG(t *testing.T) {
 			c: FixedTomorrowClocker{},
 		},
 		"notFoundInStore": {
-			c: clock.FixedClocer{},
+			c: clock.FixedClocker{},
 			moq: moq{
 				err: store.ErrNotFound,
 			},
