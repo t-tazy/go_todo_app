@@ -186,8 +186,8 @@ func TestJWTer_GetToken_NG(t *testing.T) {
 			// HTTPリクエストヘッダーにアクセストークンを付加
 			req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", signed))
 			got, err := sut.GetToken(ctx, req)
-			if err != nil {
-				t.Fatalf("want error, but got nil")
+			if err == nil {
+				t.Errorf("want error, but got nil")
 			}
 			if got != nil {
 				t.Errorf("want nil, but got %v", got)
