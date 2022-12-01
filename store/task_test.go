@@ -78,7 +78,7 @@ func prepareTasks(ctx context.Context, t *testing.T, con Execer) (entity.UserID,
 		{
 			UserID:   userID,
 			Title:    "want task 2",
-			Status:   "todo",
+			Status:   "done",
 			Created:  c.Now(),
 			Modified: c.Now(),
 		},
@@ -111,9 +111,9 @@ func prepareTasks(ctx context.Context, t *testing.T, con Execer) (entity.UserID,
 	if err != nil {
 		t.Fatal(err)
 	}
-	wants[0].ID = entity.TaskID(id)
-	wants[1].ID = entity.TaskID(id + 1)
-	wants[2].ID = entity.TaskID(id + 2)
+	tasks[0].ID = entity.TaskID(id)
+	tasks[1].ID = entity.TaskID(id + 1)
+	tasks[2].ID = entity.TaskID(id + 2)
 	return userID, wants
 }
 
@@ -124,6 +124,7 @@ func TestRepository_AddTask(t *testing.T) {
 	c := clock.FixedClocker{}
 	var wantID int64 = 20
 	okTask := &entity.Task{
+		UserID:   33,
 		Title:    "ok task",
 		Status:   "todo",
 		Created:  c.Now(),
@@ -137,8 +138,8 @@ func TestRepository_AddTask(t *testing.T) {
 	t.Cleanup(func() { _ = db.Close() })
 	mock.ExpectExec(
 		// エスケープが必要
-		`INSERT INTO task \(title, status, created, modified\) VALUES \(\?, \?, \?, \?\)`,
-	).WithArgs(okTask.Title, okTask.Status, c.Now(), c.Now()).
+		`INSERT INTO task \(user_id, title, status, created, modified\) VALUES \(\?, \?, \?, \?, \?\)`,
+	).WithArgs(okTask.UserID, okTask.Title, okTask.Status, c.Now(), c.Now()).
 		WillReturnResult(sqlmock.NewResult(wantID, 1))
 
 	xdb := sqlx.NewDb(db, "mysql")
