@@ -36,6 +36,7 @@ func (l *Login) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		RespondJSON(ctx, w, &ErrResponse{
 			Message: err.Error(),
 		}, http.StatusInternalServerError)
+		return
 	}
 	rsp := struct {
 		AccessToken string `json:"access_token"`

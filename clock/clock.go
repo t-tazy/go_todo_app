@@ -12,8 +12,8 @@ func (r RealClocker) Now() time.Time {
 	return time.Now()
 }
 
-type FixedClocer struct{}
+type FixedClocker struct{}
 
-func (fc FixedClocer) Now() time.Time {
+func (fc FixedClocker) Now() time.Time {
 	return time.Date(2022, 5, 10, 12, 34, 56, 0, time.UTC)
 }
